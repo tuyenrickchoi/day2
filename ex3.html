@@ -1,0 +1,90 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10">
+    <h1 class="text-3xl font-bold text-gray-700 mb-4">New Product</h1>
+    <hr class="mb-4">
+    
+    <div class="section bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form id="frm" class="space-y-4">
+            <p>
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Product name
+                    <input type="text" name="pname" id="pname" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </label>
+            </p>
+            <p>
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Product Quality
+                    <input type="text" name="qty" id="qty" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </label>
+            </p>
+            <p>
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Product Price
+                    <input type="text" name="pri" id="pri" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </label>
+            </p>
+            <p class="flex space-x-4">
+                <button type="button" onclick="add()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add</button>
+                <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Cancel</button>
+            </p>
+        </form>
+    </div>
+    
+    <table class="min-w-full bg-white border shadow-md rounded">
+        <thead>
+            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-left">No</th>
+                <th class="py-3 px-6 text-left">Name</th>
+                <th class="py-3 px-6 text-left">Quality</th>
+                <th class="py-3 px-6 text-left">Price</th>
+                <th class="py-3 px-6 text-left">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="tbody" class="text-gray-600 text-sm font-light">
+            <!-- thêm ở đây -->
+            <tr id="totalRow" class="border-t">
+                <td colspan="4" class="py-3 px-6 text-right font-bold">Total</td>
+                <td id="total" class="py-3 px-6 font-bold">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+<script>
+    var id = 0;
+    var total = 0;
+
+    function add() {
+        id++;
+        var pname = frm.pname.value;
+        var qty = frm.qty.value;
+        var price = frm.pri.value;
+        var sub = qty * price;
+
+        var row = "<tr class='border-t'>";
+        row += "<td class='py-3 px-6'>" + id + "</td>";
+        row += "<td class='py-3 px-6'>" + pname + "</td>";
+        row += "<td class='py-3 px-6'>" + qty + "</td>";
+        row += "<td class='py-3 px-6'>" + price + "</td>";
+        row += "<td class='py-3 px-6'>" + sub + "</td>";
+        row += "</tr>";
+
+        var totalRow = document.getElementById('totalRow');
+        totalRow.insertAdjacentHTML('beforebegin', row);
+
+        total = parseInt(total) + parseInt(sub);
+        document.getElementById('total').innerHTML = total;
+
+        frm.pname.value = '';
+        frm.qty.value = '';
+        frm.pri.value = '';
+    }
+</script>
+</body>
+</html>

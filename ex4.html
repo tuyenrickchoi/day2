@@ -1,0 +1,102 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container w-4/6 bg-teal-400 ml-5">
+        <form class="grid pl-2"> 
+                <label class="font-bold">Fullname_Customer</label>
+                <input type="text" id="Fname" name="name" class="w-2/5 p-1 mb-2 border">
+
+                <label class="font-bold">Id_Pro</label>
+                <input type="text" id="Pid" name="id" class="w-2/5 p-1 mb-2 border">
+        
+                <label class="font-bold">Name_Pro</label>
+                <input type="text" id="Pname" name="Pname" class="w-2/5 p-1 mb-2 border">
+        
+                <label class="font-bold">Quantity_Pro</label>
+                <input type="text" id="Pqa" name="Pqa" class="w-2/5 p-1 mb-2 border">
+        
+                <label class="font-bold">Price_Pro</label>
+                <input type="text" id="Ppri" name="Ppri" class="w-2/5 p-1 mb-2 border">
+            
+            <div class="div_button flex mt-5 gap-2 mb-5">
+                <button class="text-red-500" type="button" onclick="save()">Save</button>
+                <button class="text-red-500" type="button" onclick="show()">Show</button>
+                <button class="text-red-500" type="button" onclick="reset()">Reset</button>             
+            </div>
+        </form>
+
+        <table class="table w-11/12 mt-5 border border-black">
+            <thead id="thead" class="bg-teal-200 border border-black">
+                <tr>
+                    <th class="py-2">Auto_Increment</th>
+                    <th class="py-2">Fullname_Customer</th>
+                    <th class="py-2">Id_Pro</th>
+                    <th class="py-2">Name_Pro</th>
+                    <th class="py-2">Quantity_Pro</th>
+                    <th class="py-2">Price_Pro</th>
+                    <th class="py-2">Total</th>
+                </tr>
+            </thead>
+            <tbody id="tbody" class="bg-teal-100 border border-black">
+                <!-- Rows will be added here -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        var arr = [];
+        function save () {
+            var name = document.getElementById("Fname").value;
+            var id = document.getElementById("Pid").value;
+            var Pname = document.getElementById("Pname").value;
+            var Pqa = document.getElementById("Pqa").value;
+            var Ppri = document.getElementById("Ppri").value;
+
+            if (!name || !id || !Pname || !Pqa || !Ppri) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            var a = {
+                name: name,
+                id: id,
+                Pname: Pname,
+                Pqa: Pqa,
+                Ppri: Ppri,
+            }
+            console.log(a);
+            arr.push(a);
+        }
+        function show () {
+            var html = '';
+            for (i in arr) {
+                var n = i;
+                n++;
+                html += "<tr>";
+                html += "<td class = 'td1 text-center'>" + n + "</td>";
+                html += "<td class = 'td1 text-center'>" + arr[i].name + "</td>";
+                html += "<td class = 'td1 text-center'>" + arr[i].id + "</td>";
+                html += "<td class = 'td1 text-center'>" + arr[i].Pname + "</td>";
+                html += "<td class = 'td1 text-center'>" + arr[i].Pqa + "</td>";
+                html += "<td class = 'td1 text-center'>" + arr[i].Ppri + "</td>";
+                html += "<td class = 'td1 text-center'>" + parseFloat(arr[i].Pqa) + parseFloat(arr[i].Ppri) + "</td>";
+                html += "</tr>";
+            }
+            document.querySelector('tbody').innerHTML = html;
+        }
+        function reset () {
+            document.getElementById("Fname").value = '';
+            document.getElementById("Pid").value = '';
+            document.getElementById("Pname").value = '';
+            document.getElementById("Pqa").value = '';
+            document.getElementById("Ppri").value = '';
+        }
+    </script>
+</body>
+</html>
